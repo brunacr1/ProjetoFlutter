@@ -1,0 +1,12 @@
+Para a realização desta atividade, desenvolvi um aplicativo Flutter composto por quatro telas principais: login, calendário, lista de tarefas e página inicial com saudação personalizada. Todo o código produzido está disponível no meu repositório do GitHub pelo link:
+🔗 https://github.com/brunacr1/gerenciadordetarefas.git
+
+Durante o desenvolvimento, utilizei a estrutura de diretórios do Flutter, organizando o projeto dentro da pasta lib, onde foram criados os arquivos main.dart, login.dart, calendar.dart e todo.dart. Essa separação permitiu maior clareza e reutilização das telas dentro da aplicação.
+
+No main.dart, configurei a inicialização do app e defini as rotas, permitindo a navegação entre as páginas de forma estruturada. A tela de login (login.dart) foi construída usando campos de texto, validação simples e navegação para a próxima etapa após o preenchimento correto dos dados. Nessa página também incluí um texto inicial personalizado com nome e RA, seguindo a solicitação da atividade.
+
+A tela de calendário (calendar.dart) utiliza o showDatePicker, permitindo ao usuário selecionar um dia específico. Após a escolha, o app é direcionado para a tela de tarefas. Já em todo.dart, implementei a lógica para adicionar tarefas, marcá-las como concluídas e ordená-las seguindo a regra proposta: tarefas pendentes primeiro, concluídas depois, ambas em ordem alfabética. Para isso, utilizei listas dinâmicas, estados reativos e funções de comparação (compareTo), fundamentais para organizar os itens de forma eficiente.
+
+Durante o processo, foi preciso ajustar componentes como setState, validação dos campos e estruturação dos widgets, utilizando elementos como Column, ListView, TextField, ElevatedButton e CheckboxListTile. O Flutter facilitou bastante o trabalho por ser um framework declarativo, permitindo montar a interface visual de forma clara e intuitiva.
+
+Concluo que o desenvolvimento deste projeto permitiu aplicar conceitos importantes de navegação, gerenciamento de estado, composição de widgets e manipulação de listas, além de reforçar boas práticas de organização do código. O resultado final é um aplicativo funcional, responsivo e estruturado, alinhado aos requisitos solicitados na atividade.
