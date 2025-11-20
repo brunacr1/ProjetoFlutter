@@ -2,73 +2,91 @@ import 'package:flutter/material.dart';
 import 'calendar.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String email = '';
-  String password = '';
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  void validateLogin() {
-    if (email.trim().isNotEmpty && password.trim().isNotEmpty) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const CalendarPage()),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Preencha email e senha!')),
-      );
+  // -------- Validar e-mail com regex --------
+  bool validarEmail(String email) {
+    final regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return regex.hasMatch(email);
+  }
+
+  // -------- Validar senha --------
+  bool validarSenha(String senha) {
+    return senha.length >= 6;
+  }
+
+  void fazerLogin() {
+    final email = _emailController.text;
+    final senha = _passwordController.text;
+
+    if (!validarEmail(email)) {
+      mostrarErro("E-mail inválido");
+      return;
     }
+
+    if (!validarSenha(senha)) {
+      mostrarErro("A senha deve ter no mínimo 6 caracteres");
+      return;
+    }
+
+    // -------- Se tudo OK, abre o calendário --------
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => CalendarPage()),
+    );
+  }
+
+  // -------- Mostrar snackbar bonito --------
+  void mostrarErro(String mensagem) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(mensagem),
+        backgroundColor: Colors.redAccent,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+      appBar: AppBar(
+        title: Text("Login"),
+        backgroundColor: Colors.blue,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // volta para TelaInicial
+          },
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: "E-mail"),
+            ),
 
-              // ⭐ MENSAGEM PERSONALIZADA
-              const Text(
-                "Bem-vindo, meu nome é Bruna e meu RA é 1176303",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(labelText: "Senha"),
+            ),
 
-              const SizedBox(height: 30),
+            SizedBox(height: 20),
 
-              TextField(
-                onChanged: (text) => email = text,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(labelText: 'Email'),
-              ),
-
-              const SizedBox(height: 16),
-
-              TextField(
-                onChanged: (text) => password = text,
-                obscureText: true,
-                decoration: const InputDecoration(labelText: 'Senha'),
-              ),
-
-              const SizedBox(height: 32),
-
-              ElevatedButton(
-                onPressed: validateLogin,
-                child: const Text('Entrar'),
-              ),
-            ],
-          ),
+            ElevatedButton(
+              onPressed: fazerLogin,
+              child: Text("Entrar"),
+            ),
+          ],
         ),
       ),
     );
