@@ -1,5 +1,5 @@
 Para a realização desta atividade, desenvolvi um aplicativo Flutter composto por quatro telas principais: login, calendário, lista de tarefas e página inicial com saudação personalizada. Todo o código produzido está disponível no meu repositório do GitHub pelo link:
-🔗 https://github.com/brunacr1/gerenciadordetarefas.git
+🔗 https://github.com/brunacr1/ProjetoFlutter.git
 
 Durante o desenvolvimento, utilizei a estrutura de diretórios do Flutter, organizando o projeto dentro da pasta lib, onde foram criados os arquivos main.dart, login.dart, calendar.dart e todo.dart. Essa separação permitiu maior clareza e reutilização das telas dentro da aplicação.
 
